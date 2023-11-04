@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <style>
+        /* .box{
+            height: 500px;
+            width: 500px;
+            border: 2px solid darkgrey;
+        } */
+        input{
+            height: 25px;
+            width: 300px;
+            margin-top: 20px;
+            border: 2px solid darkgrey;
+        }
+        button{
+            border-radius: 25px;
+            border: 2px solid darkgrey;
+            margin: auto;
+            margin-left: 15px;
+            margin-top: 20px;
+            margin-right: 15px;
+            margin-bottom: 20px;
+            height: 30px;
+            width: 75px;
+            font-weight: bold;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="box" id="login_box">
+            <h1 style="margin: auto;">ASSALAM O ALIKUM</h1>
+            <div><input type="email" id="email" placeholder="ENTER USER NAME"></div>
+            <div><input type="password" id="password" placeholder="ENTER PASSWARD"/></div>
+            <button onclick="login()">Login</button>
+            <button onclick="signup()">Signup</button>
+        </div>
+        <div id="welcome_box">
+            Welcome User: <span id="user"></span>
+            <div>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </center>
+    <script type="module">
+        const firebaseConfig = {
+            apiKey: "AIzaSyAYjgQXmK1CiUly6oa2IMlzpHL443F8iv4",
+            authDomain: "assignment-11-d01dc.firebaseapp.com",
+            databaseURL: "https://assignment-11-d01dc-default-rtdb.firebaseio.com",
+            projectId: "assignment-11-d01dc",
+            storageBucket: "assignment-11-d01dc.appspot.com",
+            messagingSenderId: "528971241619",
+            appId: "1:528971241619:web:70a700df4bd6bf91db5566",
+            measurementId: "G-58LTQWW60E"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                console.log(user);
+                document.getElementById("user").innerHTML = user.email;
+                document.getElementById("login_box").style.display = "none";
+                document.getElementById("welcome_box").style.display = "block";
+            } else {
+                document.getElementById("login_box").style.display = "block";
+                document.getElementById("welcome_box").style.display = "none";
+            }
+        });
+    </script>
+    <script src="./app.js"></script>
+</body>
+
+</html>
